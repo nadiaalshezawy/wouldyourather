@@ -7,13 +7,13 @@ import DashBoard from "./DashBoard";
 import Error from "./Error";
 import Question from "./Question";
 import Header from "./Header";
+import { connect } from "react-redux";
+import { handleInitialData } from "../actions/shared";
 //import { _getUsers, _getQuestions } from "../utils/_DATA.js";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    //console.log(users);
+  componentDidMount() {
+    this.props.dispatch(handleInitialData());
   }
 
   render() {
@@ -35,4 +35,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect()(App);
