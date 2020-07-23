@@ -21,18 +21,33 @@ class App extends React.Component {
       <div className="ui container">
         <BrowserRouter>
           <div>
-            <Header />
-            <Route path="/" exact component={DashBoard} />
-            <Route path="/add" exact component={AddQuestion} />
-            <Route path="/leaderboard" exact component={LeaderBoard} />
-            <Route path="/question" exact component={Question} />
-            <Route path="/error" exact component={Error} />
-            <Route path="/login" exact component={Login} />
+            {this.props.loading === true ? (
+              <div>
+                <Header />
+                <Route path="/" component={Login} />
+              </div>
+            ) : (
+              <div>
+                (
+                <Header />
+                <Route path="/" exact component={DashBoard} />
+                <Route path="/add" exact component={AddQuestion} />
+                <Route path="/leaderboard" exact component={LeaderBoard} />
+                <Route path="/question" exact component={Question} />
+                <Route path="/error" exact component={Error} />
+                <Route path="/login" exact component={Login} />
+              </div>
+            )}
           </div>
         </BrowserRouter>
       </div>
     );
   }
 }
+function mapStateToProps({ authedUser }) {
+  return {
+    loading: authedUser === null,
+  };
+}
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);
