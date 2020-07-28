@@ -28,7 +28,6 @@ class App extends React.Component {
               </div>
             ) : (
               <div>
-                (
                 <Header />
                 <Route path="/" exact component={DashBoard} />
                 <Route path="/add" exact component={AddQuestion} />
