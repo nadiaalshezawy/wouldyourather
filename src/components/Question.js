@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { formatQuestion } from "../utils/helpers";
+import { formatQuestion, formatDate } from "../utils/helpers";
 //<span>{`${name} ask  would you rather \n ${optionOne} or ${optionTwo}`}</span>
 class Question extends React.Component {
   render() {
@@ -13,31 +13,26 @@ class Question extends React.Component {
     const { name, avatarURL } = author;
     console.log(this.props);
     return (
-      <div class="ui segment">
-        <div class="ui form">
-          <div class="grouped fields">
-            <p>
-              <img
-                src={avatarURL}
-                alt={`Avatar of ${name}`}
-                className="ui avatar image"
-              />
-
-              <label>Would You Rather?</label>
-            </p>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="example2" checked="checked"></input>
-                <label>{optionOne.text}</label>
-              </div>
-            </div>
-            <div class="field">
-              <div class="ui radio checkbox">
-                <input type="radio" name="example2" checked="checked"></input>
-                <label>{optionTwo.text}</label>
-              </div>
-            </div>
+      <div>
+        <br></br>
+        <div className="ui segment">
+          <img
+            src={avatarURL}
+            alt={`Avatar of ${name}`}
+            className="ui avatar image"
+          />
+          <span>{name}</span>
+          <div>{formatDate(timestamp)}</div>
+          <div className="ui secondary segment">{`Would you rather ?${optionOne.text} or ${optionTwo.text}`}</div>
+          <div>
+            {optionOne.votes.includes("tylermcginnis") ? (
+              <div>include</div>
+            ) : (
+              <div>not include</div>
+            )}
           </div>
+
+          <button className="ui violet button">view</button>
         </div>
       </div>
     );
