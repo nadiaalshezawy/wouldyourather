@@ -3,32 +3,49 @@ import { connect } from "react-redux";
 import Question from "./Question";
 
 class DashBoard extends React.Component {
+  state = {
+    UnAnswered: true,
+  };
+
   render() {
     return (
       <div className="ui segment">
-        <div className="ui two column very relaxed grid">
-          <div className="column">
-            <div className="ui violet ribbon label">UnAnswered</div>
-            <ul>
-              {this.props.unansweredIds.map((question) => (
-                <div key={question.id}>
-                  <Question id={question.id} />
-                </div>
-              ))}
-            </ul>
-          </div>
-          <div className="column">
-            <div className="ui violet ribbon label">Answered</div>
-            <ul>
-              {this.props.answeredIds.map((question) => (
-                <div key={question.id}>
-                  <Question id={question.id} />
-                </div>
-              ))}
-            </ul>
-          </div>
+        <button
+          className="ui left violet attached button"
+          onClick={() => this.setState({ UnAnswered: true })}
+        >
+          UnAnswered
+        </button>
+        <button
+          className="right violet attached ui button"
+          onClick={() => this.setState({ UnAnswered: false })}
+        >
+          Answered
+        </button>
+
+        <div className="ui  column very relaxed grid">
+          {this.state.UnAnswered ? (
+            <div className="column">
+              <ul>
+                {this.props.unansweredIds.map((question) => (
+                  <div key={question.id}>
+                    <Question id={question.id} />
+                  </div>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="column">
+              <ul>
+                {this.props.answeredIds.map((question) => (
+                  <div key={question.id}>
+                    <Question id={question.id} />
+                  </div>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-        <div className="ui vertical divider"></div>
       </div>
     );
   }
@@ -36,7 +53,7 @@ class DashBoard extends React.Component {
 
 function mapStateToProps({ authedUser, users, questions }) {
   const questionIds = Object.keys(users[authedUser].answers);
-  console.log({ questionIds });
+  // console.log({ questionIds });
 
   const answeredIds = Object.values(questions)
     .filter((question) => questionIds.includes(question.id))
@@ -44,7 +61,7 @@ function mapStateToProps({ authedUser, users, questions }) {
   const unansweredIds = Object.values(questions)
     .filter((question) => !questionIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
-  console.log({ unansweredIds });
+  // console.log({ unansweredIds });
   return {
     answeredIds,
     unansweredIds,

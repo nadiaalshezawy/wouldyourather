@@ -6,9 +6,15 @@ const Header = () => {
       <Link to="/" className="item">
         DashBoard
       </Link>
+      <Link to="/leaderboard" className="item">
+        LeaderBoard
+      </Link>
+      <Link to="/add" className="item">
+        AddQuestion
+      </Link>
       <div className="right menu">
-        <Link to="/leaderboard" className="item">
-          LeaderBoard
+        <Link to="/login" className="item">
+          Login
         </Link>
       </div>
     </div>
