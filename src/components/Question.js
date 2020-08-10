@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import QuestionDetails from "./QuestionDetails";
 import { formatQuestion, formatDate } from "../utils/helpers";
+
 //<span>{`${name} ask  would you rather \n ${optionOne} or ${optionTwo}`}</span>
 class Question extends React.Component {
   render() {
@@ -9,7 +12,7 @@ class Question extends React.Component {
     if (question === null) {
       return <p> This Question dosen't existed</p>;
     }
-    const { optionOne, optionTwo, timestamp } = question;
+    const { optionOne, optionTwo, timestamp, id } = question;
     const { name, avatarURL } = author;
     console.log(this.props);
     return (
@@ -31,8 +34,11 @@ class Question extends React.Component {
               <div>not include</div>
             )}
           </div>
-
-          <button className="ui violet button">view</button>
+          <div>
+            <Link to={`/questions/${id}`} className="ui button primary">
+              view
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -42,8 +48,6 @@ class Question extends React.Component {
 function mapStateToProps({ authedUser, users, questions }, { id }) {
   //console.log({ id });
   const question = questions[id];
-  // console.log({users[{id}]});
-  //  console.log({ question });
 
   return {
     question: question ? question : null,
