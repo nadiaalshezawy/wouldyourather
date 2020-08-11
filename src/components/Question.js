@@ -27,13 +27,7 @@ class Question extends React.Component {
           <span>{name}</span>
           <div>{formatDate(timestamp)}</div>
           <div className="ui secondary segment">{`Would you rather ?${optionOne.text} or ${optionTwo.text}`}</div>
-          <div>
-            {optionOne.votes.includes("tylermcginnis") ? (
-              <div>include</div>
-            ) : (
-              <div>not include</div>
-            )}
-          </div>
+
           <div>
             <Link to={`/questions/${id}`} className="ui button primary">
               view
