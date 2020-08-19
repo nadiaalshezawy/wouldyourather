@@ -2,7 +2,7 @@ import {
   _getUsers,
   _getQuestions,
   // _saveQuestion,
-  // _saveQuestionAnswer,
+  _saveQuestionAnswer,
   // formatQuestion,
 } from "./_DATA.js";
 
@@ -13,4 +13,8 @@ export function getInitialData() {
       questions,
     })
   );
+}
+
+export function saveQuestionAnswer(info) {
+  return _saveQuestionAnswer(info);
 }

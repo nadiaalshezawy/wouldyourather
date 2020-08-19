@@ -16,39 +16,39 @@ class AnsweredQuestion extends React.Component {
     var sum = optionOne.votes.length + optionTwo.votes.length;
 
     return (
-      <div class="ui list">
+      <div className="ui list">
         <label>Would You Rather</label>
 
-        <div class="item">
+        <div className="item">
           <Segment>
             {`${optionOne.text} (${optionOne.votes.length} of ${sum}) votes `}
 
             {optionOne.votes.includes(authedUser) ? (
-              <i class="thumbs up icon"></i>
+              <i className="thumbs up icon"></i>
             ) : null}
 
             <Progress
               percent={this.percentage(
                 optionOne.votes.length,
                 optionTwo.votes.length
-              )}
+              ).toFixed(2)}
               progress
               color="violet"
             ></Progress>
           </Segment>
         </div>
-        <div class="item">
+        <div className="item">
           <Segment>
             {`${optionTwo.text} (${optionTwo.votes.length} of ${sum}) votes `}
             {optionTwo.votes.includes(authedUser) ? (
-              <i class="thumbs up icon"></i>
+              <i className="thumbs up icon"></i>
             ) : null}
 
             <Progress
               percent={this.percentage(
                 optionTwo.votes.length,
                 optionOne.votes.length
-              )}
+              ).toFixed(2)}
               progress
               color="violet"
             ></Progress>

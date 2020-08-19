@@ -1,44 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Form, Checkbox } from "semantic-ui-react";
-/*
-state = {}
-  handleChange = (e, { value }) => this.setState({ value })
-
-  render() {
-    return (
-      <Form>
-        <Form.Field>
-          Selected value: <b>{this.state.value}</b>
-        </Form.Field>
-        <Form.Field>
-          <Checkbox
-            radio
-            label='Choose this'
-            name='checkboxRadioGroup'
-            value='this'
-            checked={this.state.value === 'this'}
-            onChange={this.handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Checkbox
-            radio
-            label='Or that'
-            name='checkboxRadioGroup'
-            value='that'
-            checked={this.state.value === 'that'}
-            onChange={this.handleChange}
-          />
-        </Form.Field>
-      </Form>
-    )*/
+import { handleQuestionAnswer } from "../actions/questions";
 
 class UnAnsweredQuestion extends React.Component {
   state = {};
-  handleChange = (e, { value }) => this.setState({ value });
+  handleChange = (e, { value }) => {
+    console.log(value);
+    e.preventDefault();
+    this.setState({ value });
+
+    const { dispatch, question, authedUser } = this.props;
+    console.log(authedUser);
+    dispatch(
+      handleQuestionAnswer({
+        qid: question.id,
+        authedUser: authedUser,
+        answer: value,
+      })
+    );
+  };
   render() {
-    const { question } = this.props;
+    const { question, authedUser } = this.props;
     const { optionOne, optionTwo } = question;
     return (
       <Form>
@@ -50,7 +33,7 @@ class UnAnsweredQuestion extends React.Component {
             radio
             label={optionOne.text}
             name="checkboxRadioGroup"
-            value={optionOne.text}
+            value="optionOne"
             checked={this.state.value === optionOne.text}
             onChange={this.handleChange}
           />
@@ -58,9 +41,9 @@ class UnAnsweredQuestion extends React.Component {
         <Form.Field>
           <Checkbox
             radio
-            label={optionOne.text}
+            label={optionTwo.text}
             name="checkboxRadioGroup"
-            value={optionTwo.text}
+            value="optionTwo"
             checked={this.state.value === optionTwo.text}
             onChange={this.handleChange}
           />
@@ -70,13 +53,14 @@ class UnAnsweredQuestion extends React.Component {
   }
 }
 
-const mapStateToProps = ({ questions }, { id }) => {
+const mapStateToProps = ({ questions, authedUser }, { id }) => {
   // console.log(state);
   const question = questions[id];
 
   console.log(question);
   return {
     question: question ? question : null,
+    authedUser,
     // author: question ? users[question.author] : null,
     // authedUser,
   };
