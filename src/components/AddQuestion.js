@@ -7,35 +7,31 @@ class AddQuestion extends React.Component {
     optionTwo: " ",
   };
 
-  handleChangeOne = (e) => {
-    const optionOne = e.target.value;
+  handleChange = (e) => {
+    const text = e.target.value;
+    const option = e.target.name;
 
     this.setState(() => ({
-      optionOne,
+      [option]: text,
     }));
 
-    console.log(optionOne);
-  };
-
-  handleChangeTwo = (e) => {
-    const optionTwo = e.target.value;
-
-    this.setState(() => ({
-      optionTwo,
-    }));
-
-    console.log(optionTwo);
+    console.log(text);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // const { optionOne, optionTwo } = this.state;
-    // this.setState(() => {
-    //   optionOne, optionTwo;
-    // });
+    const { optionOne, optionTwo } = this.state;
+
+    console.log("New Tweet: ", optionOne, optionTwo);
+
+    this.setState(() => ({
+      optionOne: "",
+      optionTwo: "",
+    }));
   };
 
   render() {
+    const { optionOne, optionTwo } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Segment color="violet">
@@ -46,8 +42,9 @@ class AddQuestion extends React.Component {
             <label>Option One</label>
             <input
               placeholder="option one"
-              onChange={this.handleChangeOne}
+              onChange={this.handleChange}
               value={this.optionOne}
+              name="optionOne"
             />
           </Form.Field>
           <Divider section />
@@ -55,13 +52,16 @@ class AddQuestion extends React.Component {
             <label>Option Two</label>
             <input
               placeholder="option two"
-              onChange={this.handleChangeTwo}
+              onChange={this.handleChange}
               value={this.optionTwo}
+              name="optionTwo"
             />
           </Form.Field>
           <Form.Field></Form.Field>
         </Segment>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={optionOne === "" || optionTwo === ""}>
+          Submit
+        </Button>
         <Button negative>Cancel</Button>
       </Form>
     );
