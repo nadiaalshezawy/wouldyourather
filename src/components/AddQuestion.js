@@ -1,10 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Button, Form, Header, Segment, Divider } from "semantic-ui-react";
-
+import { handleAddQuestion } from "../actions/questions";
+import { Redirect } from "react-router-dom";
 class AddQuestion extends React.Component {
   state = {
     optionOne: " ",
     optionTwo: " ",
+    toHome: false,
   };
 
   handleChange = (e) => {
@@ -21,17 +24,25 @@ class AddQuestion extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { optionOne, optionTwo } = this.state;
+    const { dispatch } = this.props;
+    dispatch(handleAddQuestion(optionOne, optionTwo));
 
     console.log("New Tweet: ", optionOne, optionTwo);
 
     this.setState(() => ({
       optionOne: "",
       optionTwo: "",
+      toHome: true,
     }));
   };
 
   render() {
-    const { optionOne, optionTwo } = this.state;
+    const { optionOne, optionTwo, toHome } = this.state;
+    if (toHome === true) {
+      // this.setState(toHome:false);
+      return <Redirect to="/" />;
+    }
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <Segment color="violet">
@@ -68,4 +79,4 @@ class AddQuestion extends React.Component {
   }
 }
 
-export default AddQuestion;
+export default connect()(AddQuestion);
