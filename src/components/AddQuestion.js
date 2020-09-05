@@ -70,6 +70,7 @@ class AddQuestion extends React.Component {
           </Form.Field>
           <Form.Field></Form.Field>
         </Segment>
+        &nbsp;
         <Button type="submit" disabled={optionOne === "" || optionTwo === ""}>
           Submit
         </Button>

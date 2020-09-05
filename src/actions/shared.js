@@ -3,7 +3,7 @@ import { receiveUsers } from "../actions/users";
 import { receiveQuestions } from "../actions/questions";
 import { setAuthedUser } from "../actions/authedUser";
 import { showLoading, hideLoading } from "react-redux-loading";
-const AUTHED_ID = "sarahedo";
+const AUTHED_ID = null;
 //"sarahedo"
 //"tylermcginnis"
 //const AUTHED_ID = null;
