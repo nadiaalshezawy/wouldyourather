@@ -5,26 +5,13 @@ import { Table, Header, Image } from "semantic-ui-react";
 class LeaderBoard extends React.Component {
   render() {
     const { usersIds, users } = this.props;
-    /*
-     <Table.Row>
-        <Table.Cell>
-          <Header as='h4' image>
-            <Image src='/images/avatar/small/lena.png' rounded size='mini' />
-            <Header.Content>
-              Lena
-              <Header.Subheader>Human Resources</Header.Subheader>
-            </Header.Content>
-          </Header>
-        </Table.Cell>
-        <Table.Cell>22</Table.Cell>
-      </Table.Row>
-      */
-    // const { name, id, avatarURL, answers, questions } = usersIds;
+
     console.log("leader board");
     console.log(usersIds);
     return (
       <div>
-        <Table basic="very" celled collapsing>
+        <br></br>
+        <Table celled padded>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Name</Table.HeaderCell>

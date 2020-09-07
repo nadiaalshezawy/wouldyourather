@@ -1,13 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "semantic-ui-react";
+import { Button, Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { resetAuthedUser } from "../actions/authedUser";
 class Header extends React.Component {
   handleClick = () => {
     const { dispatch } = this.props;
     dispatch(resetAuthedUser());
-    // console.log("logout");
   };
   render() {
     const { authedUser, author } = this.props;
@@ -15,7 +14,7 @@ class Header extends React.Component {
     console.log("hello");
     console.log(author);
     return (
-      <div className="ui secondary pointing menu">
+      <Menu>
         <Link to="/" className="item">
           DashBoard
         </Link>
@@ -47,19 +46,13 @@ class Header extends React.Component {
             </div>
           )}
         </div>
-      </div>
+      </Menu>
     );
   }
 }
 
 const mapStateToProps = ({ authedUser, users }) => {
-  // console.log(state);
-  // const question = questions[ownProps.match.params.question_id];
-  //  const user = Object.keys(users[authedUser]);
-
-  // console.log(question);
   return {
-    //  user:authedUser ? users[auth] : null
     author: users[authedUser],
     authedUser,
   };

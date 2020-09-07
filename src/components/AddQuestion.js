@@ -28,12 +28,14 @@ class AddQuestion extends React.Component {
     dispatch(handleAddQuestion(optionOne, optionTwo));
 
     console.log("New Tweet: ", optionOne, optionTwo);
-
-    this.setState(() => ({
-      optionOne: "",
-      optionTwo: "",
-      toHome: true,
-    }));
+    this.setState(
+      {
+        optionOne: "",
+        optionTwo: "",
+        toHome: true,
+      },
+      () => dispatch(handleAddQuestion(optionOne, optionTwo))
+    );
   };
 
   render() {
@@ -45,6 +47,7 @@ class AddQuestion extends React.Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
+        <br></br>
         <Segment color="violet">
           <Header as="h3">Add New Question</Header>
         </Segment>
@@ -70,7 +73,6 @@ class AddQuestion extends React.Component {
           </Form.Field>
           <Form.Field></Form.Field>
         </Segment>
-        &nbsp;
         <Button type="submit" disabled={optionOne === "" || optionTwo === ""}>
           Submit
         </Button>

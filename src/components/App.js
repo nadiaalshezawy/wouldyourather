@@ -6,11 +6,9 @@ import AddQuestion from "./AddQuestion";
 import QuestionDetails from "./QuestionDetails";
 import DashBoard from "./DashBoard";
 import Error from "./Error";
-import Question from "./Question";
 import Header from "./Header";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
-//import { _getUsers, _getQuestions } from "../utils/_DATA.js";
 import LoadingBar from "react-redux-loading";
 class App extends React.Component {
   componentDidMount() {

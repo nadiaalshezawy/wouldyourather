@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import QuestionDetails from "./QuestionDetails";
-import { formatQuestion, formatDate } from "../utils/helpers";
+
+import { formatDate } from "../utils/helpers";
 
 //<span>{`${name} ask  would you rather \n ${optionOne} or ${optionTwo}`}</span>
 class Question extends React.Component {
   render() {
-    const { question, author, authedUser } = this.props;
+    const { question, author } = this.props;
 
     if (question === null) {
       return <p> This Question dosen't existed</p>;
@@ -39,14 +39,13 @@ class Question extends React.Component {
   }
 }
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ users, questions }, { id }) {
   //console.log({ id });
   const question = questions[id];
 
   return {
     question: question ? question : null,
     author: question ? users[question.author] : null,
-    authedUser,
   };
 }
 export default connect(mapStateToProps)(Question);

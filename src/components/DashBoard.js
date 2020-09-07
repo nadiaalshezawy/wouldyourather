@@ -53,7 +53,6 @@ class DashBoard extends React.Component {
 
 function mapStateToProps({ authedUser, users, questions }) {
   const questionIds = Object.keys(users[authedUser].answers);
-  // console.log({ questionIds });
 
   const answeredIds = Object.values(questions)
     .filter((question) => questionIds.includes(question.id))
@@ -61,12 +60,10 @@ function mapStateToProps({ authedUser, users, questions }) {
   const unansweredIds = Object.values(questions)
     .filter((question) => !questionIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
-  // console.log({ unansweredIds });
+
   return {
     answeredIds,
     unansweredIds,
-    // questionIds: Object.keys(questions).sort(
-    // (a, b) => questions[b].timestamp - questions[a].timestamp
   };
 }
 export default connect(mapStateToProps)(DashBoard);

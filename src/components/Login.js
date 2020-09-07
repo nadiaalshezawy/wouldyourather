@@ -1,5 +1,5 @@
-import React from "react";
-import { Dropdown, Segment, Header, Button } from "semantic-ui-react";
+import React, { Fragment } from "react";
+import { Segment, Header, Button } from "semantic-ui-react";
 import { setAuthedUser } from "../actions/authedUser";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -32,7 +32,7 @@ class Login extends React.Component {
     console.log(toHome);
   };
   render() {
-    const { users, authedUser } = this.props;
+    const { users } = this.props;
     const { value, toHome } = this.state;
     console.log(users);
     if (toHome === true) {
@@ -41,42 +41,38 @@ class Login extends React.Component {
     }
 
     return (
-      <Segment padded textAlign="center" size="large">
-        <Header as="h2">
-          Welacome to Would you rather application
-          <Header.Subheader>please Login</Header.Subheader>
-        </Header>
-        <form onSubmit={this.handleSubmit}>
-          <select className="ui search dropdown" onChange={this.handleChange}>
-            <option value="">Select user</option>
-            {users.map((user) => (
-              <option value={user.id} key={user.id}>
-                {user.name}
-              </option>
-            ))}
-          </select>
-          <br></br>
-          <br></br>
+      <Fragment>
+        <br></br>
+        <Segment textAlign="center" size="large" padded="very">
+          <Header as="h2">
+            Welacome to Would you rather application
+            <Header.Subheader>please Login</Header.Subheader>
+          </Header>
+          <form onSubmit={this.handleSubmit}>
+            <select className="ui search dropdown" onChange={this.handleChange}>
+              <option value="">Select user</option>
+              {users.map((user) => (
+                <option value={user.id} key={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
+            <br></br>
+            <br></br>
 
-          <Button type="submit" disabled={value === ""}>
-            Submit
-          </Button>
-        </form>
-        <Button negative>Cancel</Button>
-      </Segment>
+            <Button type="submit" disabled={value === ""}>
+              Submit
+            </Button>
+          </form>
+        </Segment>
+      </Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ authedUser, users }) => {
-  // console.log(state);
-  // const question = questions[ownProps.match.params.question_id];
-
-  // console.log(question);
+const mapStateToProps = ({ users }) => {
   return {
-    //   question: question ? question : null,
     users: Object.values(users),
-    authedUser,
   };
 };
 

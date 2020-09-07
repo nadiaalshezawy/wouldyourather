@@ -24,7 +24,7 @@ class QuestionDetails extends React.Component {
           alt={`Avatar of ${name}`}
           className="ui centered medium circular image"
         />
-        <a className="ui violet large label">{`Author : ${name} `}</a>
+        <div className="ui violet large label">{`Author : ${name} `}</div>
 
         <div>
           {optionOne.votes.includes(authedUser) ||
