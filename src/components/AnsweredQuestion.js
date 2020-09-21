@@ -72,14 +72,3 @@ const mapStateToProps = ({ authedUser, questions }, { id }) => {
 };
 
 export default connect(mapStateToProps)(AnsweredQuestion);
-
-/*
-<div class="ui progress">
-              <div class="bar">
-                <div class="progress">{`  ${this.percentage(
-                  optionOne.votes.length,
-                  optionTwo.votes.length
-                )}%`}</div>
-              </div>
-            </div>
-            */

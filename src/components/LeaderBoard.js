@@ -7,6 +7,7 @@ class LeaderBoard extends React.Component {
     const { usersIds, users } = this.props;
 
     console.log("leader board");
+
     console.log(usersIds);
     return (
       <div>
@@ -22,7 +23,7 @@ class LeaderBoard extends React.Component {
           </Table.Header>
           <Table.Body>
             {this.props.usersIds.map((id) => (
-              <Table.Row>
+              <Table.Row key={id}>
                 <Table.Cell>
                   <Header as="h4" image>
                     <Image src={users[id].avatarURL} rounded size="mini" />

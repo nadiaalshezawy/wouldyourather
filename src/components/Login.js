@@ -70,10 +70,10 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = ({ users }) => {
+function mapStateToProps({ users }) {
   return {
     users: Object.values(users),
   };
-};
+}
 
 export default connect(mapStateToProps)(Login);

@@ -4,22 +4,29 @@ import { Form, Checkbox } from "semantic-ui-react";
 import { handleQuestionAnswer } from "../actions/questions";
 
 class UnAnsweredQuestion extends React.Component {
-  state = {};
+  state = { value: "" };
   handleChange = (e, { value }) => {
     console.log(value);
-    e.preventDefault();
+    //  e.preventDefault();
     this.setState({ value });
 
     const { dispatch, question, authedUser } = this.props;
-    console.log(authedUser);
-    dispatch(
-      handleQuestionAnswer({
-        qid: question.id,
-        authedUser: authedUser,
-        answer: value,
-      })
-    );
+    console.log("authed ", authedUser);
+    console.log("value ", value);
+    console.log("id ", question.id);
+    // if (this.state.value !== "") {
+    dispatch(handleQuestionAnswer(authedUser, question.id, value));
+    //  }
   };
+  //  const { dispatch, question, authedUser } = this.props;
+  //  console.log("authed ", authedUser);
+  //  console.log("value ", value);
+  //  console.log("id ", question.id);
+  // dispatch(
+  // handleQuestionAnswer(authedUser, question.id, value);
+  //  );
+  // };
+
   render() {
     const { question } = this.props;
     const { optionOne, optionTwo } = question;
@@ -53,14 +60,36 @@ class UnAnsweredQuestion extends React.Component {
   }
 }
 
-const mapStateToProps = ({ questions }, { id }) => {
+const mapStateToProps = ({ questions, authedUser }, { id }) => {
   // console.log(state);
   const question = questions[id];
 
   console.log(question);
   return {
     question: question ? question : null,
+    authedUser,
   };
 };
 
 export default connect(mapStateToProps)(UnAnsweredQuestion);
+
+/*
+handleChange = (e, { value }) => {
+    console.log(value);
+
+    this.setState({ value });
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { question, authedUser, handleQuestionAnswer } = this.props;
+    console.log("authed ", authedUser);
+    console.log("value ", this.state.value);
+    console.log("id ", question.id);
+
+    handleQuestionAnswer({
+      authedUser,
+      qid: question.id,
+      answer: this.state.value,
+    });
+  };
+  */

@@ -28,14 +28,11 @@ class AddQuestion extends React.Component {
     dispatch(handleAddQuestion(optionOne, optionTwo));
 
     console.log("New Tweet: ", optionOne, optionTwo);
-    this.setState(
-      {
-        optionOne: "",
-        optionTwo: "",
-        toHome: true,
-      },
-      () => dispatch(handleAddQuestion(optionOne, optionTwo))
-    );
+    this.setState({
+      optionOne: "",
+      optionTwo: "",
+      toHome: true,
+    });
   };
 
   render() {
